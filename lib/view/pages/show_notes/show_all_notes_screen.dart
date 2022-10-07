@@ -17,11 +17,7 @@ class ShowAllNotesScreen extends StatelessWidget {
                 context: context, screen: AddNoteScreen(), finish: false);
           },
           backgroundColor: Colors.grey,
-          child: InkWell(
-            onTap: (){
-              // Navigator.pop(context);
-            },
-              child: Icon(Icons.add)),
+          child: Icon(Icons.add),
         ),
         appBar: AppBar(
           backgroundColor: Colors.transparent,

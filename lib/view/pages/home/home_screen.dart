@@ -56,70 +56,72 @@ class HomeScreen extends StatelessWidget {
           },
           builder: (context, state) {
             var cubit = HomeCubit.get(context);
-            return Container(
-              width: SizeConfig.screenWidth,
-              height: SizeConfig.screenHeight,
-              child: Padding(
-                padding: EdgeInsets.all(SizeConfig.defaultSize! * 2),
-                child: RawScrollbar(
-                  thumbColor: Colors.red,
-                  radius: Radius.circular(16),
-                  thickness: 7,
-                  child: ScrollConfiguration(
-                    behavior: ScrollBehavior(),
-                    child: GlowingOverscrollIndicator(
-                      color: ORANGE,
-                      axisDirection: AxisDirection.down,
-                      child: GridView.count(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 15,
-                          crossAxisSpacing: 15,
-                          childAspectRatio: 1.4,
-                          shrinkWrap: true,
-                          // physics: ScrollPhysics(),
-                          children: List.generate(items.length, (index) {
-                            return InkWell(
-                              onTap: () {
-                                // cubit.changeDataList(index);
-                                print(index);
-                                AppNavigator.customNavigator(
-                                    context: context,
-                                    screen: screens[index],
-                                    finish: false);
-                              },
-                              child: Card(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
+            return SingleChildScrollView(
+              child: Container(
+                width: SizeConfig.screenWidth,
+                height: SizeConfig.screenHeight,
+                child: Padding(
+                  padding: EdgeInsets.all(SizeConfig.defaultSize! * 2),
+                  child: RawScrollbar(
+                    thumbColor: Colors.red,
+                    radius: Radius.circular(16),
+                    thickness: 7,
+                    child: ScrollConfiguration(
+                      behavior: ScrollBehavior(),
+                      child: GlowingOverscrollIndicator(
+                        color: ORANGE,
+                        axisDirection: AxisDirection.down,
+                        child: GridView.count(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 15,
+                            crossAxisSpacing: 15,
+                            childAspectRatio: 1.4,
+                            shrinkWrap: true,
+                            // physics: ScrollPhysics(),
+                            children: List.generate(items.length, (index) {
+                              return InkWell(
+                                onTap: () {
+                                  // cubit.changeDataList(index);
+                                  print(index);
+                                  AppNavigator.customNavigator(
+                                      context: context,
+                                      screen: screens[index],
+                                      finish: false);
+                                },
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  elevation: 5,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      SizedBox(
+                                        height: SizeConfig.defaultSize! * 1,
+                                      ),
+                                      SvgPicture.asset(
+                                        items[index].icon,
+                                        height: 50,
+                                        color: ORANGE,
+                                      ),
+                                      Text(
+                                        items[index].title,
+                                        style: TextStyle(
+                                            color: ORANGE,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: SizeConfig.defaultSize! * 1.8),
+                                      ),
+                                      SizedBox(),
+                                    ],
+                                  ),
                                 ),
-                                elevation: 5,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      height: SizeConfig.defaultSize! * 1,
-                                    ),
-                                    SvgPicture.asset(
-                                      items[index].icon,
-                                      height: 50,
-                                      color: ORANGE,
-                                    ),
-                                    Text(
-                                      items[index].title,
-                                      style: TextStyle(
-                                          color: ORANGE,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: SizeConfig.defaultSize! * 1.8),
-                                    ),
-                                    SizedBox(),
-                                  ],
-                                ),
-                              ),
-                            );
-                          })),
-                    ),
-                  )
+                              );
+                            })),
+                      ),
+                    )
 
 
+                  ),
                 ),
               ),
             );

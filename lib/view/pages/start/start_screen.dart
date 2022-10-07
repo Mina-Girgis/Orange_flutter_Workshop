@@ -19,9 +19,7 @@ class StartScreen extends StatelessWidget {
     return BlocProvider(
   create: (context) => HomeCubit(),
   child: BlocConsumer<HomeCubit, HomeState>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         var cubit = HomeCubit.get(context);
         return Scaffold(

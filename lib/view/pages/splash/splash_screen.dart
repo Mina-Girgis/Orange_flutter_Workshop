@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:odc/view/pages/start/start_screen.dart';
 import 'package:odc/view/pages/login/login_screen.dart';
@@ -17,18 +19,13 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen>with TickerProviderStateMixin{
   late AnimationController controller;
   void initState() {
-
+    startTime();
     try{
       controller = AnimationController(
         vsync: this,
         duration: const Duration(seconds: 5),)..addListener(() {
         setState(() {
-          Future.delayed(Duration(seconds: 5),(){
-            String token = CacheHelper.getData(key: 'token').toString();
-            Widget screen = (token=='-1')?LoginScreen():StartScreen();
-            AppNavigator.customNavigator(context: context, screen: screen, finish: true);
-            // Navigator.of(context,rootNavigator: true).pop();
-          });
+
         });
       });
       controller.repeat(reverse: false);
@@ -36,14 +33,24 @@ class _SplashScreenState extends State<SplashScreen>with TickerProviderStateMixi
     }catch(error){
       print('error');
     }
+  }
 
-
+  startTime() async {
+    var _duration =  Duration(seconds: 5);
+    return  Timer(_duration, navigationPage);
   }
 
   @override
   void dispose() {
     controller.dispose();
     super.dispose();
+    startTime();
+  }
+
+  void navigationPage() async{
+    String token = await CacheHelper.getData(key: 'token').toString();
+    Widget screen = (token=='-1')?LoginScreen():StartScreen();
+    AppNavigator.customNavigator(context: context, screen: screen, finish: true);
   }
 
   @override
